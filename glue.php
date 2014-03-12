@@ -45,8 +45,9 @@
         static function stick ($urls, $useQueryString = false) {
 
             $method = strtoupper($_SERVER['REQUEST_METHOD']);
+            $qs = $_SERVER['QUERY_STRING'];
             $path = $useQueryString
-                ? empty($_SERVER['QUERY_STRING']) ? '/' : $_SERVER['QUERY_STRING']
+                ? substr($qs, 0, 1) != '/' ? '/'.$qs : $qs
                 : $_SERVER['REQUEST_URI'];
 
             $found = false;
